@@ -1,34 +1,35 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
-const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const register = require('./routes/employeeRouter');
-const studentLogin = require('./routes/studentRoute')
-const aluminiLogin = require('./routes/aluminiRouter')
-const papers = require('./routes/previouspapersroutes/previouspapersroute')
-const alumini = require('./routes/aluminiroutes/aluminiRoutes')
-const jobs = require('./routes/adminRouters/adminRouters')
-const adminLogin = require('./routes/adminLoginRouter')
+const studentLogin = require('./routes/studentRoute');
+const aluminiLogin = require('./routes/aluminiRouter');
+const papers = require('./routes/previouspapersroutes/previouspapersroute');
+const alumini = require('./routes/aluminiroutes/aluminiRoutes');
+const jobs = require('./routes/adminRouters/adminRouters');
+const adminLogin = require('./routes/adminLoginRouter');
 
 const app = express();
-app.use(bodyParser.json());
+
+// Body parser is already part of express
 app.use(express.json());
+
+// CORS configuration for the frontend
 app.use(
-    cors({
-        origin: 'http://localhost:5173', 
-        methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-        credentials: true, 
-    })
+  cors({
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true,
+  })
 );
 
-const PORT = 3000;
-
+// MongoDB connection
 connectDB();
 
-
+// API routes
 app.use('/api', register);
 app.use('/api', studentLogin);
 app.use('/api', aluminiLogin);
@@ -37,6 +38,8 @@ app.use('/api', alumini);
 app.use('/api', jobs);
 app.use('/api', adminLogin);
 
+// Server
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
