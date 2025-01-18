@@ -12,6 +12,7 @@ const papers = require('./routes/previouspapersroutes/previouspapersroute');
 const alumini = require('./routes/aluminiroutes/aluminiRoutes');
 const jobs = require('./routes/adminRouters/adminRouters');
 const adminLogin = require('./routes/adminLoginRouter');
+const company = require('./routes/adminRouters/companyRouters')
 
 const app = express();
 
@@ -48,6 +49,7 @@ app.use('/api', papers);
 app.use('/api', alumini);
 app.use('/api', jobs);
 app.use('/api', adminLogin);
+app.use('/api', company);
 
 app.get('/', (req, res) => {
   res.status(200).send('Server is running...');
