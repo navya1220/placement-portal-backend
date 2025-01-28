@@ -11,6 +11,8 @@ const jobSchema = new mongoose.Schema({
   technologies: { type: [String], default: [] },
   experience: { type: String, required: true },
   postedDate: { type: Date, default: Date.now },
+  LastDate: { type: Date, default: Date.now },
+  companyUrl: { type: String, required: true },
   companyLogo: { type: String, default: "" },
 });
 
